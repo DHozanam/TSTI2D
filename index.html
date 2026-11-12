@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#142638">
+<meta name="description" content="Site STI2D du Lycée Ozanam de Lille — les six séquences, cartes mentales et activités ITEC et 2I2D.">
+<title>Site STI2D — Lycée Ozanam de Lille</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+:root{
+ --ink:#192c3b;--ink-soft:#536676;--page:#f5f7f9;--border:#e4e9ef;
+ --blue:#386bd8;--green:#23865d;--red:#ad2b3b;--yellow:#dca522;--brown:#866247;--purple:#7650b5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'DM Sans','Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.shell{max-width:1320px;padding:0 32px;margin:0 auto}
+.topbar{position:relative;z-index:10;background:#fff;border-bottom:1px solid #e8edf1}
+.top-inner{min-height:86px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:16px}
+.brand img{width:122px;height:49px;object-fit:contain}
+.brand-divider{height:36px;width:1px;background:#dce3e9}
+.brand-name{display:flex;flex-direction:column;gap:2px}
+.brand-name strong{font-family:Outfit,'Segoe UI',sans-serif;font-size:16px;letter-spacing:.015em;font-weight:750}
+.brand-name small{color:#718392;font-size:12px;letter-spacing:.025em}
+.top-label{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#536979;border:1px solid #dee5eb;background:#f7f9fa;padding:10px 16px;border-radius:100px}
+.hero{background:radial-gradient(ellipse at 72% 18%,#2f536b 0%,transparent 34%),linear-gradient(120deg,#112436 0%,#18384b 68%,#162d40 100%);position:relative;overflow:hidden;color:#fff}
+.hero:before{position:absolute;content:'';inset:0;opacity:.11;background-image:linear-gradient(#ffffff66 1px,transparent 1px),linear-gradient(90deg,#ffffff66 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(90deg,transparent 12%,#000 94%)}
+.hero:after{position:absolute;content:'';width:650px;height:650px;border:1px solid #ffffff28;border-radius:50%;top:-260px;right:-190px;box-shadow:0 0 0 56px #ffffff09,0 0 0 120px #ffffff07;pointer-events:none}
+.hero-inner{min-height:340px;display:flex;align-items:center;justify-content:space-between;gap:26px;position:relative;z-index:1;padding-top:55px;padding-bottom:58px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:#b4d7e5;text-transform:uppercase;letter-spacing:.19em;font-weight:800;font-size:11px}
+.eyebrow:before{content:'';display:block;height:7px;width:7px;border-radius:50%;background:#84dacd;box-shadow:0 0 0 4px #84dacd1e}
+.hero h1{font-family:Outfit,'Segoe UI',sans-serif;letter-spacing:-.04em;line-height:1.06;font-weight:800;font-size:clamp(38px,5.2vw,66px);max-width:790px;margin:25px 0 18px}
+.hero h1 span{color:#a4e0d8}
+.hero p{color:#c9dbe5;max-width:650px;line-height:1.65;font-size:16px;margin:0}
+.hero-drawing{width:255px;height:255px;flex:none;position:relative;display:grid;place-items:center}
+.hero-drawing .orbit{width:214px;height:214px;border:1px dashed #a7d1e25b;border-radius:50%;position:absolute}
+.hero-drawing .orbit:before{content:'';position:absolute;inset:27px;border:1px solid #a7d1e22f;border-radius:50%}
+.hero-drawing .center-symbol{display:grid;place-items:center;width:116px;height:116px;border-radius:30px;transform:rotate(-8deg);background:#ffffff16;border:1px solid #ffffff3a;box-shadow:0 20px 50px #06182445;backdrop-filter:blur(5px)}
+.hero-drawing svg{width:73px;height:73px;transform:rotate(8deg)}
+.orbit-dot{position:absolute;width:12px;height:12px;box-shadow:0 0 0 7px #ffffff10;border-radius:50%}
+.dot-one{top:11px;left:136px;background:#7fa7ff}.dot-two{top:88px;right:17px;background:#db5963}.dot-three{bottom:40px;right:39px;background:#e6be69}.dot-four{bottom:25px;left:46px;background:#89cdaf}.dot-five{top:62px;left:7px;background:#b68b69}
+.main{padding:48px 0 90px}
+.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:26px}
+.section-heading .kicker{font-size:12px;letter-spacing:.16em;font-weight:850;color:#758797;text-transform:uppercase}
+.section-heading h2{font-family:Outfit,'Segoe UI',sans-serif;letter-spacing:-.032em;font-size:clamp(28px,3.4vw,40px);margin:9px 0 0}
+.section-heading p{font-size:14px;margin:0 0 4px;color:#738594;max-width:390px;text-align:right;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
+.card{--accent:#536676;--wash:#eff3f5;position:relative;grid-column:span 2;display:flex;flex-direction:column;min-height:340px;background:white;border-radius:22px;overflow:hidden;border:1px solid #e3e8ec;box-shadow:0 12px 32px #152d4310;isolation:isolate;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.card:before{content:'';position:absolute;inset:0 0 auto 0;height:6px;background:var(--accent)}
+.card:after{content:'';position:absolute;height:220px;width:220px;border-radius:50%;top:-118px;right:-85px;background:var(--wash);z-index:-1}
+.card.available:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--accent) 33%,white);box-shadow:0 20px 46px #17354b24}
+.card.available:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.card.is-future{background:#fcfdfd;border-color:#e7eced;box-shadow:0 5px 19px #152d430b}
+.card.blue{--accent:var(--blue);--wash:#eaf0ff}
+.card.green{--accent:var(--green);--wash:#e6f4e9}
+.card.red{--accent:var(--red);--wash:#fae9ed}
+.card.yellow{--accent:var(--yellow);--wash:#fff4d2}
+.card.brown{--accent:var(--brown);--wash:#f3ece6}
+.card.purple{--accent:var(--purple);--wash:#f0eaf9}
+.card.wide{grid-column:span 3;min-height:298px}
+.card-body{padding:29px 28px 23px;display:flex;flex:1;flex-direction:column}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.seq-number{font-family:Outfit,'Segoe UI',sans-serif;font-size:13px;letter-spacing:.12em;color:var(--accent);font-weight:800;text-transform:uppercase}
+.card-icon{width:64px;height:64px;border-radius:20px;background:var(--wash);color:var(--accent);display:grid;place-items:center;flex:none}
+.card-icon svg{width:36px;height:36px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-family:Outfit,'Segoe UI',sans-serif;font-size:clamp(21px,2.1vw,26px);letter-spacing:-.023em;line-height:1.2;margin:32px 0 16px;max-width:360px;font-weight:750}
+.card.wide h3{max-width:450px;margin-top:24px}
+.card-desc{font-size:14px;color:#778894;line-height:1.55;margin:0;max-width:360px}
+.card-footer{margin-top:auto;padding-top:20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.state{font-size:12.5px;font-weight:800;letter-spacing:.01em;color:var(--accent)}
+.state.future{color:#87939b}
+.link-circle{width:42px;height:42px;border-radius:50%;background:var(--accent);color:white;display:grid;place-items:center;transition:transform .2s}
+.link-circle svg{height:21px;width:21px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.card.available:hover .link-circle{transform:translateX(3px)}
+.lock-icon{width:36px;height:36px;border-radius:50%;background:#f0f2f3;display:grid;place-items:center;color:#9cabb2}
+.lock-icon svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round}
+.page-footer{border-top:1px solid #e0e7ec;margin-top:48px;padding-top:24px;display:flex;justify-content:space-between;align-items:center;color:#8a99a4;gap:15px;font-size:12px}
+.page-footer strong{font-weight:700;color:#5e7484}
+@media (min-width:1000px){.card:nth-child(1){min-height:380px}.card:nth-child(2){min-height:380px}.card:nth-child(3){min-height:380px}}
+@media (max-width:950px){.card{grid-column:span 3}.card.wide{grid-column:span 3}.hero-drawing{transform:scale(.80);margin-right:-35px}}
+@media (max-width:720px){.shell{padding:0 20px}.top-inner{min-height:72px}.brand img{width:99px;height:41px}.brand-name small{display:none}.top-label{display:none}.hero-inner{padding:54px 0 55px;min-height:310px}.hero-drawing{display:none}.hero h1{font-size:clamp(39px,9vw,52px)}.main{padding-top:37px}.section-heading{align-items:flex-start;flex-direction:column;gap:6px}.section-heading p{text-align:left}.cards{grid-template-columns:1fr;gap:15px}.card,.card.wide{grid-column:span 1;min-height:280px}.card h3{margin-top:27px}.card-body{padding:27px}.page-footer{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* En-tête STI2D — Lycée Ozanam : grands logos des deux spécialités */
+.site-header{position:relative;overflow:hidden;background:radial-gradient(ellipse at 51% 0%,#315b70 0%,transparent 58%),linear-gradient(125deg,#112638,#193a4d 55%,#142839);color:#fff}
+.site-header::before{content:"";position:absolute;inset:0;opacity:.13;background-image:linear-gradient(#ffffff55 1px,transparent 1px),linear-gradient(90deg,#ffffff55 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.site-header-inner{position:relative;z-index:1;min-height:328px;display:grid;grid-template-columns:minmax(210px,1fr) minmax(380px,1.7fr) minmax(210px,1fr);grid-template-areas:"logo2 intro logoi";align-items:center;gap:35px;padding-top:55px;padding-bottom:55px}
+.specialty-logo{display:flex;align-items:center;justify-content:center;min-height:170px;background:#fff;border-radius:25px;padding:23px 16px;border:1px solid #ffffff6b;box-shadow:0 17px 45px #071c2b55}
+.specialty-logo img{display:block;width:100%;height:auto;max-width:255px;object-fit:contain}
+.logo-2i2d{grid-area:logo2}
+.logo-itec{grid-area:logoi}
+.intro-copy{grid-area:intro;text-align:center;min-width:0}
+.intro-copy h1{font-family:Outfit,'Segoe UI',sans-serif;font-size:clamp(43px,4.8vw,70px);letter-spacing:-.045em;line-height:1.04;margin:0 0 10px;font-weight:800}
+.intro-copy h2{font-family:Outfit,'Segoe UI',sans-serif;font-size:clamp(23px,2.35vw,32px);font-weight:650;color:#a6e4dd;letter-spacing:-.02em;line-height:1.2;margin:0 0 25px}
+.intro-copy p{font-size:16px;color:#d3e0e8;line-height:1.6;max-width:570px;margin:0 auto}
+@media(max-width:1050px){.site-header-inner{grid-template-columns:minmax(175px,1fr) minmax(310px,1.75fr) minmax(175px,1fr);gap:19px}.specialty-logo{padding:16px 12px;min-height:140px}}
+@media(max-width:720px){.site-header-inner{grid-template-columns:1fr 1fr;grid-template-areas:"logo2 logoi" "intro intro";gap:15px;padding-top:30px;padding-bottom:44px}.specialty-logo{min-height:100px;border-radius:18px;padding:13px 10px}.specialty-logo img{max-width:190px}.intro-copy{padding-top:14px}.intro-copy h1{font-size:clamp(42px,10vw,58px)}.intro-copy h2{font-size:clamp(22px,5.5vw,27px);margin-bottom:16px}.intro-copy p{font-size:14.5px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+ <div class="shell site-header-inner">
+  <div class="specialty-logo logo-2i2d"><img src="ressources/logo_2i2d.png" alt="Logo 2I2D — Ingénierie, Innovation et Développement Durable"></div>
+  <div class="intro-copy">
+   <h1>Site STI2D</h1>
+   <h2>Lycée Ozanam de Lille</h2>
+   <p>Navigue entre les différentes séquences pour retrouver les cartes mentales, les activités et leurs ressources.</p>
+  </div>
+  <div class="specialty-logo logo-itec"><img src="ressources/logo_itec.png" alt="Logo ITEC — Innovation Technologique et Écoconception"></div>
+ </div>
+</header>
+<main class="shell main">
+ <div class="section-heading">
+  <div><div class="kicker">Le programme</div><h2>Les 6 séquences</h2></div>
+  <p>Sélectionne une séquence disponible pour accéder à sa carte mentale.</p>
+ </div>
+ <div class="cards">
+  <a class="card blue available" href="sequence-1/Carte_sequence_1.html" aria-label="Ouvrir la séquence 1 : Comment améliorer la pratique sportive ?">
+   <div class="card-body"><div class="card-top"><div class="seq-number">Séquence 01</div><div class="card-icon"><svg viewBox="0 0 40 40"><circle cx="25" cy="7.5" r="3"/><path d="m22 14-5 6 5 5 3 8m-3-19 8 5 7 1m-19 0-11 3m15 2-10 9m6-20 7 2"/></svg></div></div>
+    <h3>Comment améliorer la pratique sportive ?</h3><p class="card-desc">Analyser et améliorer des systèmes au service du sport.</p>
+    <div class="card-footer"><span class="state">Découvrir la séquence</span><span class="link-circle"><svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+   </div>
+  </a>
+  <article class="card green is-future" aria-label="Séquence 2, à venir">
+   <div class="card-body"><div class="card-top"><div class="seq-number">Séquence 02</div><div class="card-icon"><svg viewBox="0 0 40 40"><path d="M6 18 20 7l14 11v16H6z"/><path d="M12 34V24h8v10"/><path d="M29 10c-7 1-10 5-9 11 6 1 11-3 9-11Z"/><path d="M20 21 27 14"/></svg></div></div>
+    <h3>Comment réduire l'impact environnemental dans l'habitat ?</h3><p class="card-desc">Une séquence consacrée à l'habitat et au développement durable.</p>
+    <div class="card-footer"><span class="state future">À venir</span><span class="lock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span></div>
+   </div>
+  </article>
+  <a class="card red available" href="sequence-3/Carte_sequence_3.html" aria-label="Ouvrir la séquence 3 : Comment faciliter la vie à la maison ?">
+   <div class="card-body"><div class="card-top"><div class="seq-number">Séquence 03</div><div class="card-icon"><svg viewBox="0 0 40 40"><path d="M5 19 20 7l15 12v16H5V19Z"/><path d="M16 35V24h8v11"/><path d="M14 15c3-3 9-3 12 0M17 18c2-2 4-2 6 0"/><circle cx="20" cy="21" r="1" fill="currentColor" stroke="none"/></svg></div></div>
+    <h3>Comment faciliter la vie à la maison ?</h3><p class="card-desc">Explorer la domotique, les objets connectés et les mécanismes.</p>
+    <div class="card-footer"><span class="state">Découvrir la séquence</span><span class="link-circle"><svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+   </div>
+  </a>
+  <article class="card purple is-future" aria-label="Séquence 4, à venir">
+   <div class="card-body"><div class="card-top"><div class="seq-number">Séquence 04</div><div class="card-icon"><svg viewBox="0 0 40 40"><path d="M20 34s-13-8.4-13-17a7.5 7.5 0 0 1 13-4.8A7.5 7.5 0 0 1 33 17c0 8.6-13 17-13 17Z"/><path d="M11 22h5l3-5 4 10 3-5h4"/></svg></div></div>
+    <h3>Comment aider les personnes malades ou handicapées ?</h3><p class="card-desc">Concevoir des solutions technologiques au service de l'autonomie.</p>
+    <div class="card-footer"><span class="state future">À venir</span><span class="lock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span></div>
+   </div>
+  </article>
+  <article class="card yellow is-future" aria-label="Séquence 5, à venir">
+   <div class="card-body"><div class="card-top"><div class="seq-number">Séquence 05</div><div class="card-icon"><svg viewBox="0 0 40 40"><circle cx="10" cy="29" r="6"/><circle cx="31" cy="29" r="6"/><path d="m10 29 8-15 5 15h8L22 18H14m4-4h5m-10-2h6"/></svg></div></div>
+    <h3>Comment faciliter la mobilité en ville ?</h3><p class="card-desc">Analyser les déplacements et imaginer une mobilité plus intelligente.</p>
+    <div class="card-footer"><span class="state future">À venir</span><span class="lock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span></div>
+   </div>
+  </article>
+
+  <article class="card brown is-future" aria-label="Séquence 6 : Projet, à venir">
+   <div class="card-body"><div class="card-top"><div class="seq-number">Séquence 06</div><div class="card-icon"><svg viewBox="0 0 40 40"><rect x="7" y="7" width="26" height="26" rx="4"/><path d="m12 17 8-6 8 6v11H12V17Z"/><path d="M17 28v-7h6v7"/><path d="M5 20h4m22 0h4M20 5v4m0 22v4"/></svg></div></div>
+    <h3>Projet</h3><p class="card-desc">Un espace consacré au projet STI2D, à découvrir prochainement.</p>
+    <div class="card-footer"><span class="state future">À venir</span><span class="lock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span></div>
+   </div>
+  </article>
+ </div>
+ <footer class="page-footer"><span><strong>Terminale STI2D</strong> · Sciences de l'ingénieur · ITEC &amp; 2I2D</span><span>6 séquences · Un parcours technologique</span></footer>
+</main>
+</body>
+</html>
